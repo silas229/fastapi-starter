@@ -1,0 +1,28 @@
+name: Python Backend Tests
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: [3.11, 3.12, 3.13]
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install poetry
+        run: pipx install poetry
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: "poetry"
+      - name: Install dependencies
+        run: poetry install
+      - name: Generate SECRET_KEY
+        run: echo "SECRET_KEY=$(openssl rand -hex 32)" >> .env
+        shell: bash
+      - name: Run tests
+        run: poetry run pytest

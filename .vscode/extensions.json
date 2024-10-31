@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "qwtel.sqlite-viewer",
+    "ms-python.python",
+    "ms-python.debugpy",
+    "ms-python.autopep8",
+    "tamasfe.even-better-toml"
+  ]
+}
